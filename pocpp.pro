@@ -4,4 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        customer.cpp \
+        main.cpp \
+        order.cpp \
+        product.cpp
+
+HEADERS += \
+    customer.h \
+    order.h \
+    product.h
