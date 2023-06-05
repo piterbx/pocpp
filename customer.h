@@ -22,10 +22,12 @@ class Customer
 
     std::vector<Order> orders;
 
-    void makeOrder(int prodId);
 public:
     Customer(std::string name, std::string surname, std::string email, double phoneNumber, std::string deliveryAddress, gender sex);
     ~Customer();
+
+    void editCustomerData(); //todo
+    void makeOrder();
 };
 
 #endif // CUSTOMER_H

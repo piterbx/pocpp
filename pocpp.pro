@@ -5,11 +5,17 @@ CONFIG -= qt
 
 SOURCES += \
         customer.cpp \
+        file.cpp \
         main.cpp \
         order.cpp \
-        product.cpp
+        product.cpp \
+        shop.cpp
 
 HEADERS += \
     customer.h \
+    file.h \
     order.h \
-    product.h
+    product.h \
+    shop.h
+
+RESOURCES +=

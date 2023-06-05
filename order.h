@@ -2,20 +2,28 @@
 #define ORDER_H
 
 #include <map>
+#include <vector>
 
 #include "product.h"
 
-enum paymentMethod {transfer, blik};
+enum methodsOfPayment {transfer, blik};
 
 class Order
 {
+    static int nrOfOrders;
+
+    bool editable;
     int id;
     int time;
     double totalValue;
-    paymentMethod methodOfPayment;
-    std::map<Product,int> orderedProducts;
+    methodsOfPayment paymentMethod;
+    std::map<int,int> orderedProducts; //prodId, quantity
 
-    Order();
+    void addProduct(int prodId, int qty);
+
+public:
+    Order(int time, double totalValue, methodsOfPayment paymentMethod);
+    ~Order();
 };
 
 #endif // ORDER_H

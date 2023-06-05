@@ -1,7 +1,12 @@
 #include <iostream>
+#include <vector>
+
+#include "shop.h"
 
 int main()
 {
-    std::cout << "menu:";
+    Shop *sh = Shop::getShop();
+
+
     return 0;
 }
