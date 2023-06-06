@@ -10,22 +10,23 @@ enum gender {male, female, other};
 
 class Customer
 {
-    static int nrOfCustomers;
-
     int id;
     std::string name;
     std::string surname;
     std::string email;
-    double phoneNumber;
+    std::string phoneNumber;
     std::string deliveryAddress;
     gender sex;
+
+    void confirmOrder(Order *ord);
 
     std::vector<Order> orders;
 
 public:
-    Customer(std::string name, std::string surname, std::string email, double phoneNumber, std::string deliveryAddress, gender sex);
+    Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex);
     ~Customer();
 
+    void showData();
     void editCustomerData(); //todo
     void makeOrder();
 };

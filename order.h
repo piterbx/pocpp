@@ -19,11 +19,16 @@ class Order
     methodsOfPayment paymentMethod;
     std::map<int,int> orderedProducts; //prodId, quantity
 
-    void addProduct(int prodId, int qty);
+    void countTotalValue();
 
 public:
     Order(int time, double totalValue, methodsOfPayment paymentMethod);
     ~Order();
+
+    void addProduct(int prodId, int qty);
+
+    void setEditable(bool edit);
+    bool getEditable();
 };
 
 #endif // ORDER_H
