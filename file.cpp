@@ -23,15 +23,16 @@ std::vector<Product> File::dataFromTxt(std::string source)
             file >> line;
             stringstream l(line);
 
-            string a, b, c, d, e;
+            string a, b, c, d, e, f;
 
             getline(l, a, ';');
             getline(l, b, ';');
             getline(l, c, ';');
             getline(l, d, ';');
-            getline(l, e);
+            getline(l, e, ';');
+            getline(l, f);
 
-            tab.push_back(Product(atoi(a.c_str()), b, c, atof(d.c_str()), atof(e.c_str())));
+            tab.push_back(Product(atoi(a.c_str()), b, c, atof(d.c_str()), atof(e.c_str()), atoi(f.c_str())));
 
         }
     }

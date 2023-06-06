@@ -18,7 +18,7 @@ class Customer
     std::string deliveryAddress;
     gender sex;
 
-    void confirmOrder(Order *ord);
+    std::map<int,int> cart; //prodId, quantity
 
     std::vector<Order> orders;
 
@@ -31,6 +31,8 @@ public:
     void showData();
     void editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex); //todo
     void makeOrder();
+
+    void addToCart(int prodId, int qty);
 };
 
 #endif // CUSTOMER_H

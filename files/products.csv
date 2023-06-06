@@ -1,4 +1,4 @@
-prodId;name;description;price
-0;Klawiatura Logitech;mechaniczna RGB;189.22
-1;Mysz HP;biurowa;49.99
-2;Dysk Twardy Adata;500gb;249.33
+prodId;name;description;price;quantity
+0;Klawiatura Logitech;mechaniczna RGB;189.22;1000
+1;Mysz HP;biurowa;49.99;100
+2;Dysk Twardy Adata;500gb;249.33;450

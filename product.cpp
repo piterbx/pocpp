@@ -1,9 +1,18 @@
 #include "product.h"
 
-Product::Product(double code, std::string name, std::string desc, float price, float vat)
-    :code(code),name(name),description(desc),price(price),vat(vat)
+Product::Product(double code, std::string name, std::string desc, float price, float vat, int quantity)
+    :code(code),name(name),description(desc),price(price),vat(vat),quantity(quantity)
 {
 
+}
+
+void Product::showProduct()
+{
+    std::cout << "Product: " << this->code << std::endl
+              << "Name: " << this->name << std::endl
+              << "Description: " << this->description << std::endl
+              << "Price: " << this->price << std::endl
+              << "Vat: " << this->vat << std::endl;
 }
 
 double Product::getCode()
@@ -29,6 +38,11 @@ float Product::getPrice()
 int Product::getQuantity()
 {
     return quantity;
+}
+
+float Product::getVat()
+{
+    return vat;
 }
 
 void Product::setQuantity(int qty)

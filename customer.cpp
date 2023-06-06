@@ -52,22 +52,32 @@ void Customer::editCustomerData(std::string newName, std::string newSurname, std
 
 void Customer::makeOrder()
 {
-    //insert data
-    Order *order = new Order(3434, 0, transfer);
-    //confirm or add more?
-    confirmOrder(order);
-    delete order;//?
+    Order *order = new Order(transfer, cart);
+    order->showOrder();
+    this->orders.push_back(*order);
+    delete order;
 }
 
-void Customer::confirmOrder(Order *ord)
+void Customer::addToCart(int prodId, int qty)
 {
-    if(ord->getEditable()){
-        //do you want to add something more?
-        bool choice = false;
-        while(choice) ord->addProduct(4, 5);
+    std::vector<Product> prods = Shop::getShop()->getProducts();
 
-        ord->setEditable(false);
-        this->orders.push_back(*ord);
-
+    Product *tmp = nullptr;
+    for(Product & prod : prods){
+        if(prod.getCode()==prodId) tmp = &prod;
     }
+
+    if(tmp!=nullptr){
+
+        if(tmp->getQuantity()>qty){//jesli jest tyle w magazynie
+
+            tmp->setQuantity(tmp->getQuantity()-1); // - z magazynu
+
+            cart.insert(std::pair<int,int>(prodId,qty)); //do koszyka
+            std::cout << "item added" << std::endl;
+
+        }
+
+    } else std::cout << "not found" << std::endl;
+
 }

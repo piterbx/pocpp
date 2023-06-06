@@ -71,9 +71,42 @@ void Shop::editCustomer()
     } else addNewCustomer();
 }
 
+void Shop::makeOrder()
+{
+    int id;
+    Customer *tmp = nullptr;
+    std::cout << "as who? type customer id: ";
+    std::cin >> id;
+    for(Customer &c : customers) tmp = &c;
+    if(tmp!=nullptr){
+        bool decisionAddMore = true;
+        while(decisionAddMore){
+            showProducts();
+            int prodId, qty;
+            std::cout << "select product, type id: ";
+            std::cin >> prodId;
+            std::cout << "quantity: ";
+            std::cin >> qty;
+
+            tmp->addToCart(prodId, qty);
+            std::cout << "[0] = confirm order, [1] = add more products" << std::endl << "choice: ";
+            std::cin >> decisionAddMore;
+        }
+
+        int selectPayMethod;
+        std::cout << "select payment method (0=transfer 1=blik): ";
+        std::cin >> selectPayMethod;
+    } else std::cout << "customer not found" << std::endl;
+}
+
 void Shop::showCustomers()
 {
     for(Customer &c : customers) c.showData();
+}
+
+void Shop::showProducts()
+{
+    for(Product &p : products) p.showProduct();
 }
 
 std::vector<Product> &Shop::getProducts()

@@ -19,13 +19,13 @@ class Order
     methodsOfPayment paymentMethod;
     std::map<int,int> orderedProducts; //prodId, quantity
 
-    void countTotalValue();
+    float countTotalValue();
 
 public:
-    Order(int time, double totalValue, methodsOfPayment paymentMethod);
+    Order(methodsOfPayment paymentMethod, std::map<int,int> cart);
     ~Order();
 
-    void addProduct(int prodId, int qty);
+    void showOrder();
 
     void setEditable(bool edit);
     bool getEditable();
