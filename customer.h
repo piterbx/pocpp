@@ -6,7 +6,7 @@
 
 #include "order.h"
 
-enum gender {male, female, other};
+enum gender {male, female, other, none};
 
 class Customer
 {
@@ -26,8 +26,10 @@ public:
     Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex);
     ~Customer();
 
+    int getId();
+
     void showData();
-    void editCustomerData(); //todo
+    void editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex); //todo
     void makeOrder();
 };
 

@@ -39,6 +39,40 @@ void Shop::addNewCustomer()
 
     this->customers.push_back(*client);
 
+    showCustomers();
+}
+
+void Shop::editCustomer()
+{
+    int id;
+    Customer *tmp = nullptr;
+    showCustomers();
+    std::cout << std::endl << "enter customer id: ";
+    std::cin >> id;
+    for(Customer &c : customers) if(c.getId() == id) tmp = &c;
+
+    if(tmp) {
+        std::string name, surname, email, deliveryAddress, phoneNumber;
+        int selectGender;
+        std::cout << std::endl << "Editing existing customer: " << std::endl << "enter new name [n = no change]: ";
+        std::cin >> name;
+        std::cout << "enter new surname [n = no change]: ";
+        std::cin >> surname;
+        std::cout << "enter new email [n = no change]: ";
+        std::cin >> email;
+        std::cout << "enter new phone number [n = no change]: ";
+        std::cin >> phoneNumber;
+        std::cout << "enter new default delivery address [n = no change]: ";
+        std::cin >> deliveryAddress;
+        std::cout << "enter new gender (0=male, 1=female, 2=other) [3 = no change]: ";
+        std::cin >> selectGender;
+        std::cout << std::endl;
+        tmp->editCustomerData(name, surname, email, phoneNumber, deliveryAddress, static_cast<gender>(selectGender));
+    } else addNewCustomer();
+}
+
+void Shop::showCustomers()
+{
     for(Customer &c : customers) c.showData();
 }
 

@@ -24,6 +24,7 @@ int main()
 
             switch(choice){
             case 1: sh->addNewCustomer(); break;
+            case 2: sh->editCustomer(); break;
             case 7:
                 return 0;
             default:

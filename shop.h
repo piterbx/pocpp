@@ -15,6 +15,9 @@ public:
     static Shop *getShop();
 
     void addNewCustomer();
+    void editCustomer();
+
+    void showCustomers();
 
 
     std::vector<Product> & getProducts();

@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include "customer.h"
 #include "shop.h"
 
@@ -12,6 +14,11 @@ Customer::Customer(std::string name, std::string surname, std::string email, std
 Customer::~Customer()
 {
 
+}
+
+int Customer::getId()
+{
+    return id;
 }
 
 void Customer::showData()
@@ -33,9 +40,14 @@ void Customer::showData()
     std::cout << std::endl;
 }
 
-void Customer::editCustomerData()
+void Customer::editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex)
 {
-
+    if(strcmp(newName.data(), "n")!=0) this->name = newName;
+    if(strcmp(newSurname.data(), "n")!=0) this->surname = newSurname;
+    if(strcmp(newEmail.data(), "n")!=0) this->email = newEmail;
+    if(strcmp(newPhoneNumber.data(), "n")!=0) this->phoneNumber = newPhoneNumber;
+    if(strcmp(newDeliveryAddress.data(), "n")!=0) this->deliveryAddress = newDeliveryAddress;
+    if(newSex!=none) this->sex = newSex;
 }
 
 void Customer::makeOrder()
