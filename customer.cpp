@@ -21,6 +21,11 @@ int Customer::getId()
     return id;
 }
 
+std::vector<Order> &Customer::getOrders()
+{
+    return orders;
+}
+
 void Customer::showData()
 {
     std::cout << std::endl << "Customer " << this->id << " info: " << std::endl
@@ -50,12 +55,28 @@ void Customer::editCustomerData(std::string newName, std::string newSurname, std
     if(newSex!=none) this->sex = newSex;
 }
 
+void Customer::showOrders()
+{
+    for(Order &o : orders) o.showOrder();
+}
+
 void Customer::makeOrder()
 {
     Order *order = new Order(transfer, cart);
     order->showOrder();
     this->orders.push_back(*order);
     delete order;
+}
+
+void Customer::editOrder(int id)
+{
+    Order *tmp = nullptr;
+    for(Order &o : orders) if(o.getId()==id) tmp = &o;
+    if(tmp!=nullptr){
+        tmp->showOrder();
+        std::cout << "editing order: " << tmp->getId() << std::endl;
+
+    } else std::cout << "wrong order id" << std::endl;
 }
 
 void Customer::addToCart(int prodId, int qty)

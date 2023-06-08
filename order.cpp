@@ -24,16 +24,10 @@ void Order::showOrder()
 
 }
 
-void Order::setEditable(bool edit)
+int Order::getId()
 {
-    editable = edit;
+    return id;
 }
-
-bool Order::getEditable()
-{
-    return editable;
-}
-
 
 float Order::countTotalValue()
 {
@@ -52,7 +46,7 @@ Order::Order(methodsOfPayment paymentMethod, std::map<int,int> cart)
     :paymentMethod(paymentMethod), orderedProducts(cart)
 {
     //time = std::chrono::system_clock::now();
-    this->editable = true;
+
     this->id = nrOfOrders++;
 
     totalValue = countTotalValue();

@@ -12,7 +12,6 @@ class Order
 {
     static int nrOfOrders;
 
-    bool editable;
     int id;
     int time;
     double totalValue;
@@ -27,8 +26,7 @@ public:
 
     void showOrder();
 
-    void setEditable(bool edit);
-    bool getEditable();
+    int getId();
 };
 
 #endif // ORDER_H

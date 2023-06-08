@@ -27,10 +27,14 @@ public:
     ~Customer();
 
     int getId();
+    std::vector<Order> &getOrders();
 
     void showData();
     void editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex); //todo
+
+    void showOrders();
     void makeOrder();
+    void editOrder(int id);
 
     void addToCart(int prodId, int qty);
 };
