@@ -103,7 +103,7 @@ void Customer::addToCart(int prodId, int qty)
         Product *tmp = &prods[prodId];
         if(tmp->getQuantity()>qty){//jesli jest tyle w magazynie
 
-            tmp->setQuantity(tmp->getQuantity()-1); // - z magazynu
+            tmp->setQuantity(tmp->getQuantity()-qty); // - z magazynu
 
             if(cart.find(prodId)!=cart.end()){
                 cart[prodId] += qty;
@@ -123,8 +123,14 @@ void Customer::addToCart(int prodId, int qty)
 void Customer::removeFromCart(int prodId, int qty)
 {
     if(cart.find(prodId)!=cart.end()){
+        Product &tmp = Shop::getShop()->getProducts()[prodId];
         if(qty<cart[prodId]) cart[prodId] -= qty;
-        else cart.erase(prodId);
+        else {
+            qty = cart[prodId]; //bo ktos moze podac powyzej tego co w koszyku
+            cart.erase(prodId);
+        }
+        tmp.setQuantity(tmp.getQuantity()+qty);
+
         std::cout << "removed " << std::endl;
     } else std::cout << "not found" << std::endl;
 
