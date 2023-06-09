@@ -12,6 +12,7 @@ class Product
     int quantity;
     float vat;
 public:
+    Product(){}
     Product(double code, std::string name, std::string desc, float price, float vat, int quantity);
 
     void showProduct();

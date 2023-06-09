@@ -8,7 +8,7 @@
 Customer::Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex)
     :name(name),surname(surname),email(email),phoneNumber(phoneNumber),deliveryAddress(deliveryAddress),sex(sex)
 {
-    this->id = Shop::getShop()->getCustomers().size();
+    this->id = Shop::getShop()->getCustomers().size()-1;
 }
 
 Customer::~Customer()

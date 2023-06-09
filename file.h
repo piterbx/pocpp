@@ -2,16 +2,18 @@
 #define FILE_H
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 
 #include "product.h"
+#include "customer.h"
 
-class File
-{
-    File();
-public:
-    static std::vector<Product> dataFromTxt(std::string source);
-    static void dataFromCsv(std::string source);
-};
+namespace File {
+
+    void dataFromCsv(std::string source, std::vector<Product> &tab);
+    void dataFromCsv(std::string source, std::vector<Customer> &tab);
+
+}
 
 #endif // FILE_H

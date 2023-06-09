@@ -19,6 +19,7 @@ int main()
 
     try {
         while(choice!=7){
+            std::cout << "choice: ";
             std::cin >> choice;
             if(std::cin.fail()) throw 45;
 
@@ -26,6 +27,9 @@ int main()
             case 1: sh->addNewCustomer(); break;
             case 2: sh->editCustomer(); break;
             case 3: sh->makeOrder(); break;
+            case 4: sh->editOrder(); break;
+            case 5: sh->showProducts(); break;
+            case 6: sh->showOrders(); break;
             case 7:
                 return 0;
             default:

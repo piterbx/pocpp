@@ -1,1 +1,2 @@
-id;name;surname;email;phoneNumber
+name;surname;email;phoneNumber;deliveryAddress;gender
+Ala;Kowalska;al@kow.pl;123456789;Kwiatowa_28_Lublin;female

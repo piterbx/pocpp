@@ -16,10 +16,13 @@ public:
 
     void addNewCustomer();
     void editCustomer();
+
     void makeOrder();
+    void editOrder();
 
     void showCustomers();
     void showProducts();
+    void showOrders();
 
 
     std::vector<Product> & getProducts();
