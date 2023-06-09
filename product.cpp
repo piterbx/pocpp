@@ -12,7 +12,7 @@ void Product::showProduct()
               << "Name: " << this->name << std::endl
               << "Description: " << this->description << std::endl
               << "Price: " << this->price << std::endl
-              << "Vat: " << this->vat << std::endl;
+              << "Vat: " << this->vat << std::endl << std::endl;
 }
 
 double Product::getCode()

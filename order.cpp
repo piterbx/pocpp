@@ -1,4 +1,5 @@
 #include <chrono>
+#include <ctime>
 
 #include "order.h"
 #include "shop.h"
@@ -12,15 +13,27 @@ Order::~Order()
 
 void Order::showOrder()
 {
-    std::cout << "Order id: " << this->id << std::endl
-              << "Time: " << this->time << std::endl
-              << "Products: " << std::endl;
+    std::cout << std::endl << "Order id: " << this->id << std::endl << "Time: ";
+
+    std::tm* now = std::localtime(&time);
+    std::cout << (now->tm_year + 1900) << '-'
+              << (now->tm_mon + 1) << '-'
+              << now->tm_mday << " "
+              << now->tm_hour << ':'
+              << now->tm_min << ':'
+              << now->tm_sec << std::endl;
+
+    std::cout << "Products: " << std::endl;
 
     for(auto & [key, value] : this->orderedProducts){
-        for(Product & prod : Shop::getShop()->getProducts()) if(prod.getCode()==key) prod.showProduct();
+        Shop::getShop()->getProducts()[key].showProduct();
+        std::cout << "quantity: " << value << std::endl;
     }
-    std::cout << "Total value: " << this->totalValue << std::endl
-              << "Selected payment method: " << this->paymentMethod << std::endl;
+    std::cout << "Total value: " << this->countTotalValue() << std::endl
+              << "Selected payment method: ";
+    if(this->paymentMethod==0) std::cout << "transfer" << std::endl;
+    else std::cout << "blik" << std::endl;
+    std::cout << std::endl;
 
 }
 
@@ -33,21 +46,21 @@ float Order::countTotalValue()
 {
     float sum = 0;
     for(const auto & [key,value] : this->orderedProducts){
-        float tmp;
-        for(Product &prod : Shop::getShop()->getProducts()){
-            if(prod.getCode()==key) tmp = prod.getPrice()+prod.getPrice()*prod.getVat();
-        }
+        float tmp = 0;
+        Product prod = Shop::getShop()->getProducts()[key];
+        tmp = prod.getPrice()+prod.getPrice()*prod.getVat();
         sum += tmp * value;
     }
+    totalValue = sum;
     return sum;
 }
 
 Order::Order(methodsOfPayment paymentMethod, std::map<int,int> cart)
     :paymentMethod(paymentMethod), orderedProducts(cart)
 {
-    //time = std::chrono::system_clock::now();
+    this->time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 
     this->id = nrOfOrders++;
 
-    totalValue = countTotalValue();
+    countTotalValue();
 }

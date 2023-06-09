@@ -19,6 +19,7 @@ class Customer
     gender sex;
 
     std::map<int,int> cart; //prodId, quantity
+    void showCart();
 
     std::vector<Order> orders;
 
@@ -33,7 +34,7 @@ public:
     void editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex); //todo
 
     void showOrders();
-    void makeOrder();
+    void makeOrder(methodsOfPayment method);
     void editOrder(int id);
 
     void addToCart(int prodId, int qty);

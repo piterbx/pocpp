@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <ctime>
 
 #include "product.h"
 
@@ -13,7 +14,7 @@ class Order
     static int nrOfOrders;
 
     int id;
-    int time;
+    std::time_t time;
     double totalValue;
     methodsOfPayment paymentMethod;
     std::map<int,int> orderedProducts; //prodId, quantity

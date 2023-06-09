@@ -5,6 +5,17 @@
 
 
 
+void Customer::showCart()
+{
+    std::cout << std::endl << "Cart: " << std::endl;
+    std::map<int,int>::iterator iter;
+    for (iter = cart.begin(); iter != cart.end(); ++iter) {
+
+        std::cout << "id: " << iter->first << " name: " << Shop::getShop()->getProducts()[iter->first].getName() << " qty: "  << iter->second << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 Customer::Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex)
     :name(name),surname(surname),email(email),phoneNumber(phoneNumber),deliveryAddress(deliveryAddress),sex(sex)
 {
@@ -40,6 +51,7 @@ void Customer::showData()
     case 0: std::cout << "male"; break;
     case 1: std::cout << "female"; break;
     case 2: std::cout << "other"; break;
+    default: std::cout << "-"; break;
     }
 
     std::cout << std::endl;
@@ -60,9 +72,10 @@ void Customer::showOrders()
     for(Order &o : orders) o.showOrder();
 }
 
-void Customer::makeOrder()
+void Customer::makeOrder(methodsOfPayment method)
 {
-    Order *order = new Order(transfer, cart);
+    Order *order = new Order(method, cart);
+    cart.clear();
     order->showOrder();
     this->orders.push_back(*order);
     delete order;
@@ -83,21 +96,23 @@ void Customer::addToCart(int prodId, int qty)
 {
     std::vector<Product> prods = Shop::getShop()->getProducts();
 
-    Product *tmp = nullptr;
-    for(Product & prod : prods){
-        if(prod.getCode()==prodId) tmp = &prod;
-    }
+    if(prodId < static_cast<int>(prods.size()) && prodId >=0){
 
-    if(tmp!=nullptr){
-
+        Product *tmp = &prods[prodId];
         if(tmp->getQuantity()>qty){//jesli jest tyle w magazynie
 
             tmp->setQuantity(tmp->getQuantity()-1); // - z magazynu
 
-            cart.insert(std::pair<int,int>(prodId,qty)); //do koszyka
+            if(cart.find(prodId)!=cart.end()){
+                cart[prodId] += qty;
+            } else
+            cart.insert(std::pair<int,int>(prodId,qty));
+
+            this->showCart();
             std::cout << "item added" << std::endl;
 
-        }
+
+        } else std::cout << "not enough products in store" << std::endl;
 
     } else std::cout << "not found" << std::endl;
 

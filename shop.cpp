@@ -37,9 +37,7 @@ void Shop::addNewCustomer()
     if(selectGender>3 || selectGender<0) selectGender = 2;
     std::cout << std::endl;
 
-    std::unique_ptr<Customer> client = std::make_unique<Customer>(name, surname, email, phoneNumber, deliveryAddress, static_cast<gender>(selectGender));
-
-    this->customers.push_back(*client);
+    this->customers.push_back(Customer(name, surname, email, phoneNumber, deliveryAddress, static_cast<gender>(selectGender)));
 
     showCustomers();
 }
@@ -81,21 +79,25 @@ void Shop::editCustomer()
 void Shop::makeOrder()
 {
     int id;
-    Customer *tmp = nullptr;
     std::cout << "as who? type customer id: ";
     std::cin >> id;
-    for(Customer &c : customers) if(tmp->getId()==id) tmp = &c;
-    if(tmp!=nullptr){
+    if(id<static_cast<int>(customers.size()) && id >=0){
+
+        Customer &tmp = customers[id];
         bool decisionAddMore = true;
+
         while(decisionAddMore){
+
             showProducts();
             int prodId, qty;
             std::cout << "select product, type id: ";
             std::cin >> prodId;
+            fflush(stdin);
             std::cout << "quantity: ";
             std::cin >> qty;
 
-            tmp->addToCart(prodId, qty);
+            tmp.addToCart(prodId, qty);
+
             std::cout << "[0] = confirm order, [1] = add more products" << std::endl << "choice: ";
             std::cin >> decisionAddMore;
         }
@@ -103,7 +105,10 @@ void Shop::makeOrder()
         int selectPayMethod;
         std::cout << "select payment method (0=transfer 1=blik): ";
         std::cin >> selectPayMethod;
+
+        tmp.makeOrder(static_cast<methodsOfPayment>(selectPayMethod));
         std::cout << "ordered" << std::endl << std::endl;
+
     } else std::cout << "customer not found" << std::endl;
 }
 
