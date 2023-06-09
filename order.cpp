@@ -13,7 +13,7 @@ Order::~Order()
 
 void Order::showOrder()
 {
-    std::cout << std::endl << "Order id: " << this->id << std::endl << "Time: ";
+    std::cout << std::endl << "Order id: " << this->id << "Time: ";
 
     std::tm* now = std::localtime(&time);
     std::cout << (now->tm_year + 1900) << '-'

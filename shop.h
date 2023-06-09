@@ -18,7 +18,6 @@ public:
     void editCustomer();
 
     void makeOrder();
-    void editOrder();
 
     void showCustomers();
     void showProducts();

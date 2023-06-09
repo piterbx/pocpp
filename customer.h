@@ -38,6 +38,7 @@ public:
     void editOrder(int id);
 
     void addToCart(int prodId, int qty);
+    void removeFromCart(int prodId, int qty);
 };
 
 #endif // CUSTOMER_H

@@ -8,11 +8,9 @@ Product::Product(double code, std::string name, std::string desc, float price, f
 
 void Product::showProduct()
 {
-    std::cout << "Product: " << this->code << std::endl
-              << "Name: " << this->name << std::endl
-              << "Description: " << this->description << std::endl
-              << "Price: " << this->price << std::endl
-              << "Vat: " << this->vat << std::endl << std::endl;
+    std::cout << "Product: " << this->code << " Name: " << this->name
+              << " Description: " << this->description << " Price: " << this->price
+              << " Vat: " << this->vat << std::endl;
 }
 
 double Product::getCode()

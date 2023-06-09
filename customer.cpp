@@ -8,11 +8,13 @@
 void Customer::showCart()
 {
     std::cout << std::endl << "Cart: " << std::endl;
-    std::map<int,int>::iterator iter;
-    for (iter = cart.begin(); iter != cart.end(); ++iter) {
+    if(cart.size()>0){
+        std::map<int,int>::iterator iter;
+        for (iter = cart.begin(); iter != cart.end(); ++iter) {
 
-        std::cout << "id: " << iter->first << " name: " << Shop::getShop()->getProducts()[iter->first].getName() << " qty: "  << iter->second << std::endl;
-    }
+            std::cout << "id: " << iter->first << " name: " << Shop::getShop()->getProducts()[iter->first].getName() << " qty: "  << iter->second << std::endl;
+        }
+    } else std::cout << "empty";
     std::cout << std::endl;
 }
 
@@ -116,4 +118,15 @@ void Customer::addToCart(int prodId, int qty)
 
     } else std::cout << "not found" << std::endl;
 
+}
+
+void Customer::removeFromCart(int prodId, int qty)
+{
+    if(cart.find(prodId)!=cart.end()){
+        if(qty<cart[prodId]) cart[prodId] -= qty;
+        else cart.erase(prodId);
+        std::cout << "removed " << std::endl;
+    } else std::cout << "not found" << std::endl;
+
+    showCart();
 }

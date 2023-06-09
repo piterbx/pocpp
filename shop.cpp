@@ -84,21 +84,25 @@ void Shop::makeOrder()
     if(id<static_cast<int>(customers.size()) && id >=0){
 
         Customer &tmp = customers[id];
-        bool decisionAddMore = true;
+        int decisionAddMore = 1;
 
-        while(decisionAddMore){
+        while(decisionAddMore!=0){
 
-            showProducts();
+            if(decisionAddMore==1) showProducts();
+            else std::cout << "removing: " << std::endl;
+
             int prodId, qty;
             std::cout << "select product, type id: ";
             std::cin >> prodId;
-            fflush(stdin);
             std::cout << "quantity: ";
             std::cin >> qty;
 
-            tmp.addToCart(prodId, qty);
+            if(decisionAddMore==1){
+                tmp.addToCart(prodId, qty);
 
-            std::cout << "[0] = confirm order, [1] = add more products" << std::endl << "choice: ";
+            } else if(decisionAddMore==2) tmp.removeFromCart(prodId, qty);
+
+            std::cout << "[0] = confirm order, [1] = add more products [2] = remove product" << std::endl << "choice: ";
             std::cin >> decisionAddMore;
         }
 
@@ -109,40 +113,6 @@ void Shop::makeOrder()
         tmp.makeOrder(static_cast<methodsOfPayment>(selectPayMethod));
         std::cout << "ordered" << std::endl << std::endl;
 
-    } else std::cout << "customer not found" << std::endl;
-}
-
-void Shop::editOrder()
-{
-    int id, qty;
-    std::string decide;
-    Customer *tmp = nullptr;
-    std::cout << "as who? type customer id: ";
-    std::cin >> id;
-    for(Customer &c : customers) tmp = &c;
-    if(tmp!=nullptr){
-        tmp->showOrders();
-        if(tmp->getOrders().size()>0){
-            std::cout << "type order id: ";
-            std::cin >> id;
-            Order *ord = nullptr;
-            for(Order &o : tmp->getOrders()) ord = &o;
-            if(ord->getId()==id) {
-                std::cout << "editing order:" << std::endl;
-                std::cout << "add products? [y/n]: ";
-                std::cin >> decide;
-                if(decide=="y"){
-                    std::cout << "type product id: ";
-                    std::cin >> id;
-                    std::cout << "quantity: ";
-                    std::cin >> qty;
-                }
-                tmp->addToCart(id, qty);
-
-            } else std::cout << "wrong order id" << std::endl;
-        } else {
-            std::cout << "no orders found" << std::endl;
-        }
     } else std::cout << "customer not found" << std::endl;
 }
 
