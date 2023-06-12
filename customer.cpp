@@ -3,6 +3,7 @@
 #include "customer.h"
 #include "shop.h"
 
+int Customer::prevId = 0;
 
 
 void Customer::showCart()
@@ -21,7 +22,8 @@ void Customer::showCart()
 Customer::Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex)
     :name(name),surname(surname),email(email),phoneNumber(phoneNumber),deliveryAddress(deliveryAddress),sex(sex)
 {
-    this->id = Shop::getShop()->getCustomers().size()-1;
+    this->id = prevId;
+    prevId++;
 }
 
 Customer::~Customer()
@@ -135,4 +137,34 @@ void Customer::removeFromCart(int prodId, int qty)
     } else std::cout << "not found" << std::endl;
 
     showCart();
+}
+
+std::string Customer::getName()
+{
+    return name;
+}
+
+std::string Customer::getSurname()
+{
+    return surname;
+}
+
+std::string Customer::getEmail()
+{
+    return email;
+}
+
+std::string Customer::getPhoneNumber()
+{
+    return phoneNumber;
+}
+
+std::string Customer::getDeliveryAddress()
+{
+    return deliveryAddress;
+}
+
+gender Customer::getGender()
+{
+    return sex;
 }

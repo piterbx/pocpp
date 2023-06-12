@@ -10,6 +10,7 @@ class Shop
     std::vector<Product> products;
     std::vector<Customer> customers;
 
+
     Shop();
 public:
     static Shop *getShop();
@@ -23,9 +24,10 @@ public:
     void showProducts();
     void showOrders();
 
-
     std::vector<Product> & getProducts();
     std::vector<Customer> & getCustomers();
+
+    ~Shop();
 };
 
 #endif // SHOP_H

@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <string>
+
 #include "file.h"
 
 void File::dataFromCsv(std::string source, std::vector<Product> &tab)
@@ -53,6 +56,8 @@ void File::dataFromCsv(std::string source, std::vector<Customer> &tab)
                 getline(l, e, ';');
                 getline(l, f);
 
+                std::replace( e.begin(), e.end(), '_', ' ');
+
                 if(f.compare("female")==0) g=female;
                 else if(f.compare("male")==0) g=male;
                 else g=other;
@@ -62,4 +67,26 @@ void File::dataFromCsv(std::string source, std::vector<Customer> &tab)
             }
         }
         file.close();
+}
+
+void File::toFileCsv(std::string source, std::vector<Customer> tab)
+{
+    std::fstream file;
+    file.open(source, std::ios_base::out);
+    if(file.is_open()){
+        file << "name;surname;email;phoneNumber;deliveryAddress;gender";
+        for(Customer & c : tab){
+
+            std::string adr = c.getDeliveryAddress();
+            std::replace( adr.begin(), adr.end(), ' ', '_');
+
+            std::string tmp;
+            if(c.getGender()==male) tmp = "male";
+            else if(c.getGender()==female) tmp = "female";
+            else tmp = "other";
+
+            file << '\n' << c.getName() << ';' << c.getSurname() << ';' << c.getEmail() << ';' << c.getPhoneNumber() << ';' << adr << ';' << tmp;
+        }
+    }
+    file.close();
 }

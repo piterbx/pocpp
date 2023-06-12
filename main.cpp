@@ -17,7 +17,7 @@ int main()
               << "[6] exit" << std::endl;
 
     try {
-        while(choice!=7){
+        while(choice!=6){
             std::cout << "choice: ";
             std::cin >> choice;
             if(std::cin.fail()) throw std::runtime_error("not an int");
@@ -29,7 +29,7 @@ int main()
             case 4: sh->showProducts(); break;
             case 5: sh->showOrders(); break;
             case 6:
-                return 0;
+                break;
             default:
                 std::cout << "wrong number" << std::endl;
             }
@@ -37,6 +37,8 @@ int main()
     } catch(std::exception const & ex) {
         std::cout << "error: " << ex.what() << std::endl;
     }
+
+    delete sh;
 
     return 0;
 }

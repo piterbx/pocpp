@@ -11,6 +11,11 @@ Shop::Shop()
     File::dataFromCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.csv", customers);
 }
 
+Shop::~Shop()
+{
+    File::toFileCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.csv", customers);
+}
+
 Shop *Shop::getShop()
 {
     if(shop==nullptr) shop = new Shop();

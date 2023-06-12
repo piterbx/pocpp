@@ -23,6 +23,8 @@ class Customer
 
     std::vector<Order> orders;
 
+    static int prevId;
+
 public:
     Customer(std::string name, std::string surname, std::string email, std::string phoneNumber, std::string deliveryAddress, gender sex);
     ~Customer();
@@ -39,6 +41,13 @@ public:
 
     void addToCart(int prodId, int qty);
     void removeFromCart(int prodId, int qty);
+
+    std::string getName();
+    std::string getSurname();
+    std::string getEmail();
+    std::string getPhoneNumber();
+    std::string getDeliveryAddress();
+    gender getGender();
 };
 
 #endif // CUSTOMER_H
