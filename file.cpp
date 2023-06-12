@@ -36,37 +36,37 @@ void File::dataFromCsv(std::string source, std::vector<Product> &tab)
 
 void File::dataFromCsv(std::string source, std::vector<Customer> &tab)
 {
-        std::fstream file;
-        std::string line;
-        file.open(source, std::ios_base::in);
-        if(file.is_open()){
-            file >> line; //headers
+    std::fstream file;
+    std::string line;
+    file.open(source, std::ios_base::in);
+    if(file.is_open()){
+        file >> line; //headers
 
-            while(!file.eof()){
-                file >> line;
-                std::stringstream l(line);
+        while(!file.eof()){
+            file >> line;
+            std::stringstream l(line);
 
-                std::string a, b, c, d, e, f;
-                gender g;
+            std::string a, b, c, d, e, f;
+            gender g;
 
-                getline(l, a, ';');
-                getline(l, b, ';');
-                getline(l, c, ';');
-                getline(l, d, ';');
-                getline(l, e, ';');
-                getline(l, f);
+            getline(l, a, ';');
+            getline(l, b, ';');
+            getline(l, c, ';');
+            getline(l, d, ';');
+            getline(l, e, ';');
+            getline(l, f);
 
-                std::replace( e.begin(), e.end(), '_', ' ');
+            std::replace( e.begin(), e.end(), '_', ' ');
 
-                if(f.compare("female")==0) g=female;
-                else if(f.compare("male")==0) g=male;
-                else g=other;
+            if(f.compare("female")==0) g=female;
+            else if(f.compare("male")==0) g=male;
+            else g=other;
 
-                tab.push_back(Customer(a, b, c, d, e, g));
+            tab.push_back(Customer(a, b, c, d, e, g));
 
-            }
         }
-        file.close();
+    }
+    file.close();
 }
 
 void File::toFileCsv(std::string source, std::vector<Customer> tab)
@@ -86,6 +86,68 @@ void File::toFileCsv(std::string source, std::vector<Customer> tab)
             else tmp = "other";
 
             file << '\n' << c.getName() << ';' << c.getSurname() << ';' << c.getEmail() << ';' << c.getPhoneNumber() << ';' << adr << ';' << tmp;
+        }
+    }
+    file.close();
+}
+
+void File::toFileCsv(std::string source, std::vector<Order> tab)
+{
+    std::fstream file;
+    file.open(source, std::ios_base::out);
+    if(file.is_open()){
+        file << "orderId;ownerId;time;totalValue;paymentMethod;orderedProducts";
+        for(Order & ord : tab){
+
+            file << '\n' << ord.getId() << ';' << ord.getOwnerId() << ';' << ord.getTime() << ';' << ord.getTotalValue()
+                 << ';' << ord.getPaymentMethod() << ';';
+
+            for(const auto & [key, value] : ord.getOrderedProducts()){
+                file << key << '=';
+                file << value << '|'; //separator
+            }
+
+            //przydałaby się baza lub json
+        }
+    }
+    file.close();
+}
+
+void File::dataFromCsv(std::string source, std::vector<Order> &tab)
+{
+    std::fstream file;
+    std::string line;
+    file.open(source, std::ios_base::in);
+    if(file.is_open()){
+        file >> line; //headers
+
+        while(!file.eof()){
+            file >> line;
+            std::stringstream l(line);
+
+            //orderId;ownerId;time;totalValue;paymentMethod;orderedProducts
+            std::string a, b, c, d, e, f;
+            std::map<int,int> tmp;
+
+            getline(l, a, ';');
+            getline(l, b, ';');
+            getline(l, c, ';');
+            getline(l, d, ';');
+            getline(l, e, ';');
+            getline(l, f);
+
+
+            std::stringstream ordProds(f);
+            std::string prod;
+            while(getline(ordProds, prod, '|')){
+                std::stringstream prd(prod);
+                std::string pId, qty;
+                getline(prd, pId, '=');
+                getline(prd, qty, '|');
+                tmp.insert(std::pair<int,int>(stoi(pId), stoi(qty)));
+            }
+
+            tab.push_back(Order(stoi(a), stoi(b), static_cast<std::time_t>(stoi(c)), stof(d), static_cast<methodsOfPayment>(stoi(e)), tmp));
         }
     }
     file.close();

@@ -13,8 +13,10 @@ namespace File {
 
     void dataFromCsv(std::string source, std::vector<Product> &tab);
     void dataFromCsv(std::string source, std::vector<Customer> &tab);
+    void dataFromCsv(std::string source, std::vector<Order> &tab);
 
     void toFileCsv(std::string source, std::vector<Customer> tab);
+    void toFileCsv(std::string source, std::vector<Order> tab);
 
 }
 

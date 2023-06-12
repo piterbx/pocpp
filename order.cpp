@@ -6,11 +6,6 @@
 
 int Order::nrOfOrders = 0;
 
-Order::~Order()
-{
-    nrOfOrders--;
-}
-
 void Order::showOrder()
 {
     std::cout << std::endl << "Order id: " << this->id << std::endl << " Customer id: " << this->ownerId << " Time: ";
@@ -93,4 +88,10 @@ Order::Order(methodsOfPayment paymentMethod, std::map<int,int> cart)
     this->id = nrOfOrders++;
 
     countTotalValue();
+}
+
+Order::Order(int id, int ownerId, time_t time, double totalValue, methodsOfPayment paymentMethod, std::map<int, int> orderedProducts)
+    :id(id),ownerId(ownerId),time(time),totalValue(totalValue),paymentMethod(paymentMethod), orderedProducts(orderedProducts)
+{
+    nrOfOrders++;
 }

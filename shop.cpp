@@ -9,6 +9,7 @@ Shop::Shop()
 {
     File::dataFromCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\products.csv", products);
     File::dataFromCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.csv", customers);
+    File::dataFromCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\orders.csv", orders);
 }
 
 Shop::~Shop()

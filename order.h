@@ -24,7 +24,7 @@ class Order
 
 public:
     Order(methodsOfPayment paymentMethod, std::map<int,int> cart);
-    ~Order();
+    Order(int id, int ownerId, std::time_t time, double totalValue, methodsOfPayment paymentMethod, std::map<int,int> cart);
 
     void showOrder();
 
