@@ -18,6 +18,10 @@ namespace File {
     void toFileCsv(std::string source, std::vector<Customer> tab);
     void toFileCsv(std::string source, std::vector<Order> tab);
 
+
+    void toFileBinary(std::string source, std::vector<Customer> tab);
+    void toFileBinary(std::string source, std::vector<Order> tab);
+
 }
 
 #endif // FILE_H

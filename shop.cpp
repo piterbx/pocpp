@@ -16,6 +16,9 @@ Shop::~Shop()
 {
     File::toFileCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.csv", customers);
     File::toFileCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\orders.csv", orders);
+
+    File::toFileBinary("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.xls", customers);
+    File::toFileBinary("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\orders.xls", orders);
 }
 
 Shop *Shop::getShop()

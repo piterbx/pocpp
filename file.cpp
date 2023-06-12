@@ -152,3 +152,44 @@ void File::dataFromCsv(std::string source, std::vector<Order> &tab)
     }
     file.close();
 }
+
+void File::toFileBinary(std::string source, std::vector<Customer> tab)
+{
+    std::ofstream file;
+    file.open(source, std::ios_base::out |std::ios_base::binary);
+    if(file.is_open()){
+        std::string line;
+        for(Customer c : tab){
+            line = std::to_string(c.getId()) + c.getName() + c.getSurname() + c.getEmail() + c.getPhoneNumber() + c.getDeliveryAddress();
+            if(c.getGender()==male) line += male;
+            else if(c.getGender()==female) line += female;
+            else line += other;
+            file.write(reinterpret_cast<char*>(&line), sizeof(line));
+        }
+    }
+    file.close();
+}
+
+void File::toFileBinary(std::string source, std::vector<Order> tab)
+{
+    std::ofstream file;
+    file.open(source, std::ios_base::out |std::ios_base::binary);
+    if(file.is_open()){
+        std::string line;
+        for(Order ord : tab){
+            line = std::to_string(ord.getId()) +" "+ std::to_string(ord.getOwnerId()) +" "+ std::to_string(ord.getTime()) +" "+
+                    std::to_string(ord.getTotalValue());
+
+            if(ord.getPaymentMethod()==transfer) line+=" transfer";
+            else line+=" blik";
+
+            for(const auto & [key, value] : ord.getOrderedProducts()){
+                line+= " prodId: " + key;
+                line += " quantity: " + value;
+            }
+
+            file.write(reinterpret_cast<char*>(&line), sizeof(line));
+        }
+    }
+    file.close();
+}
