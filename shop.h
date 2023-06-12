@@ -9,7 +9,7 @@ class Shop
     static Shop* shop;
     std::vector<Product> products;
     std::vector<Customer> customers;
-
+    std::vector<Order> orders;
 
     Shop();
 public:
@@ -26,6 +26,7 @@ public:
 
     std::vector<Product> & getProducts();
     std::vector<Customer> & getCustomers();
+    std::vector<Order> & getOrders();
 
     ~Shop();
 };

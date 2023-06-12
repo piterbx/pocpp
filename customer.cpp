@@ -36,20 +36,15 @@ int Customer::getId()
     return id;
 }
 
-std::vector<Order> &Customer::getOrders()
-{
-    return orders;
-}
-
 void Customer::showData()
 {
-    std::cout << std::endl << "Customer " << this->id << " info: " << std::endl
-              << "name: " << this->name << std::endl
-              << "surname: " << this->surname << std::endl
-              << "email: " << this->email << std::endl
-              << "phone: " << this->phoneNumber << std::endl
-              << "default delivery address: " << this->deliveryAddress << std::endl
-              << "gender: ";
+    std::cout << "Customer " << this->id
+              << " name: " << this->name
+              << " surname: " << this->surname
+              << " email: " << this->email << std::endl
+              << " phone: " << this->phoneNumber
+              << " default delivery address: " << this->deliveryAddress
+              << " gender: ";
 
     switch(this->sex){
     case 0: std::cout << "male"; break;
@@ -58,7 +53,7 @@ void Customer::showData()
     default: std::cout << "-"; break;
     }
 
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }
 
 void Customer::editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex)
@@ -71,24 +66,19 @@ void Customer::editCustomerData(std::string newName, std::string newSurname, std
     if(newSex!=none) this->sex = newSex;
 }
 
-void Customer::showOrders()
-{
-    for(Order &o : orders) o.showOrder();
-}
-
 void Customer::makeOrder(methodsOfPayment method)
 {
-    Order *order = new Order(method, cart);
+    Order order(method, cart);
+    order.setOwnerId(this->id);
     cart.clear();
-    order->showOrder();
-    this->orders.push_back(*order);
-    delete order;
+    order.showOrder();
+    Shop::getShop()->getOrders().push_back(order);
 }
 
 void Customer::editOrder(int id)
 {
     Order *tmp = nullptr;
-    for(Order &o : orders) if(o.getId()==id) tmp = &o;
+    for(Order &o : Shop::getShop()->getOrders()) if(o.getId()==id && o.getOwnerId()==this->id) tmp = &o;
     if(tmp!=nullptr){
         tmp->showOrder();
         std::cout << "editing order: " << tmp->getId() << std::endl;

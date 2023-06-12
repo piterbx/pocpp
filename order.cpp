@@ -13,7 +13,7 @@ Order::~Order()
 
 void Order::showOrder()
 {
-    std::cout << std::endl << "Order id: " << this->id << "Time: ";
+    std::cout << std::endl << "Order id: " << this->id << std::endl << " Customer id: " << this->ownerId << " Time: ";
 
     std::tm* now = std::localtime(&time);
     std::cout << (now->tm_year + 1900) << '-'
@@ -37,9 +37,39 @@ void Order::showOrder()
 
 }
 
+void Order::setOwnerId(int owner)
+{
+    ownerId = owner;
+}
+
+int Order::getOwnerId()
+{
+    return ownerId;
+}
+
 int Order::getId()
 {
     return id;
+}
+
+time_t Order::getTime()
+{
+    return time;
+}
+
+double Order::getTotalValue()
+{
+    return totalValue;
+}
+
+methodsOfPayment Order::getPaymentMethod()
+{
+    return paymentMethod;
+}
+
+std::map<int, int> &Order::getOrderedProducts()
+{
+    return orderedProducts;
 }
 
 float Order::countTotalValue()

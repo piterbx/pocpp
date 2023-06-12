@@ -13,6 +13,7 @@ class Order
 {
     static int nrOfOrders;
 
+    int ownerId;
     int id;
     std::time_t time;
     double totalValue;
@@ -27,7 +28,14 @@ public:
 
     void showOrder();
 
+    void setOwnerId(int owner);
+
+    int getOwnerId();
     int getId();
+    std::time_t getTime();
+    double getTotalValue();
+    methodsOfPayment getPaymentMethod();
+    std::map<int, int> &getOrderedProducts();
 };
 
 #endif // ORDER_H

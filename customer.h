@@ -21,8 +21,6 @@ class Customer
     std::map<int,int> cart; //prodId, quantity
     void showCart();
 
-    std::vector<Order> orders;
-
     static int prevId;
 
 public:
@@ -30,12 +28,10 @@ public:
     ~Customer();
 
     int getId();
-    std::vector<Order> &getOrders();
 
     void showData();
     void editCustomerData(std::string newName, std::string newSurname, std::string newEmail, std::string newPhoneNumber, std::string newDeliveryAddress, gender newSex); //todo
 
-    void showOrders();
     void makeOrder(methodsOfPayment method);
     void editOrder(int id);
 

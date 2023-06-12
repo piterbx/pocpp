@@ -17,5 +17,3 @@ HEADERS += \
     order.h \
     product.h \
     shop.h
-
-RESOURCES +=

@@ -14,6 +14,7 @@ Shop::Shop()
 Shop::~Shop()
 {
     File::toFileCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\customers.csv", customers);
+    File::toFileCsv("C:\\Users\\Piotrek\\Desktop\\Projekt zaliczeniowy\\files\\orders.csv", orders);
 }
 
 Shop *Shop::getShop()
@@ -83,6 +84,7 @@ void Shop::editCustomer()
 
 void Shop::makeOrder()
 {
+    showCustomers();
     int id;
     std::cout << "as who? type customer id: ";
     std::cin >> id;
@@ -134,14 +136,11 @@ void Shop::showProducts()
 
 void Shop::showOrders()
 {
-    if(customers.size()>0){
-        for(Customer &c : customers){
-            std::cout << std::endl << "Customer id: " << c.getId() << std::endl;
-            if(c.getOrders().size()>0){
-                for(Order &o : c.getOrders()) o.showOrder();
-            } else std::cout << "no orders" << std::endl << std::endl;
+    if(orders.size()>0){
+        for(Order &ord : orders){
+            ord.showOrder();
         }
-    } else std::cout << "no customers found" << std::endl;
+    } else std::cout << "no orders found" << std::endl;
 
 }
 
@@ -153,5 +152,10 @@ std::vector<Product> &Shop::getProducts()
 std::vector<Customer> &Shop::getCustomers()
 {
     return customers;
+}
+
+std::vector<Order> &Shop::getOrders()
+{
+    return orders;
 }
 
